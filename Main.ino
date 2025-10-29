@@ -81,6 +81,7 @@ void wifiConnect() {
   Serial.printf("WiFi: connecting to '%s'\n", WIFI_SSID);
   showConnecting();
 
+
   const unsigned long TIMEOUT = 15000;
   unsigned long t0 = millis();
   while (WiFi.status() != WL_CONNECTED && millis() - t0 < TIMEOUT) { 
@@ -90,6 +91,12 @@ void wifiConnect() {
   Serial.println();
 
   if (WiFi.status() == WL_CONNECTED) {
+    lcd.clear();
+    lcd.setCursor(0,0); 
+    lcd.print("Password: ");
+    lcd.setCursor(0,1); 
+    lcd.print(WIFI_PASSWORD);
+    delay(600);
     Serial.printf("WiFi OK  IP:%s  RSSI:%d dBm\n",
                   WiFi.localIP().toString().c_str(), WiFi.RSSI());
     showConnected();
